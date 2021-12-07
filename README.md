@@ -35,3 +35,4 @@ eilučių kiekis failo pavadinime ".txt"
 | 1000000.txt handle: 2.39874s | 1000000.txt handle: 1.20593s | 1000000.txt handle: 1.137s | 1000000.txt handle: 1.05531s|
 | 1000000.txt sort + write: 2.26775s | 1000000.txt sort + write: 1.74218s | 1000000.txt sort + write: 1.74841s | 1000000.txt sort + write: 1.74016s|
 | 1000000.txt total: 6.03193s | 1000000.txt total: 3.94976s | 1000000.txt total: 3.87391s | 1000000.txt total: 3.76008s|
+| 130,3 kB |49,1 kB | 53,2 kB | 57,2 kB |
