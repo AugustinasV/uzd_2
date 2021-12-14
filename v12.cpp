@@ -1,99 +1,22 @@
-#include <iostream>
-#include <string>
-#include <iomanip>
-#include <algorithm>
-#include <vector>
-#include <fstream>
-#include <chrono>
-#include <list>
+#include "v11class.h"
 
 using namespace std;
 
-int linecount = 0;
-int errorcount = 0;
-const int columncount = 8; /// file column count
-const int size = 100000; /// file entry count
-float vectortotaltime=0;
-
-vector <string> lineread;
-vector <string> temp;
-
-void fileGenerator() 
-{
-    ofstream file0(std::to_string(size)+".txt");
-    for (int x=1; x<size+1; x++) {
-        file0 << ("vardas" + std::to_string(x)) << " " << ("pavarde" + std::to_string(x)) << " ";
-        for (int y=0; y<columncount-2; y++) 
-        {
-            file0 << to_string(rand() % 10 + 1) << " ";
-        }
-        file0 << "\n";    
-    }
-    file0.close();
-}
-
-void readLine()
-{
-    string qwer;
-    ifstream file;
-    try {
-        file.open(std::to_string(size)+".txt");
-        if (!file.is_open()) {
-            throw 403;
-            }
-        }
-
-    catch (int asd) {
-        cout <<"ERROR: missing file"<<endl;
-        std::terminate();
+Student::Student() {
+    vardas_ = "";
+    pavarde_ = "";
+    galutinis_ =0;
+    galutinis_paz_ = 0;
+    egz_paz_ = 0;
+    nd_paz_.reserve(columncount-3);
+    wordread_.reserve(columncount);
     }
 
-    while (getline(file, qwer)) {
-        if (qwer=="") {                 /// check for empty lines, skip to next line if empty found
-            continue;
-        }
-        lineread.push_back(qwer);
-        linecount ++;
+void Student::setwordread(vector <string> v) {
+    wordread_ = v;
     }
-    file.close();
-}
 
-void readStr(string a) 
-{
-    string word;
-    stringstream str(a);
-    while (str >> word) {
-        temp.push_back(word);
-    }   
-};
-
-class timer {
-    private:
-        std::chrono::time_point<std::chrono::high_resolution_clock> start;
-    public:
-        timer() : start{std::chrono::high_resolution_clock::now()} {}
-        void reset() {
-            start = std::chrono::high_resolution_clock::now();
-        }
-        double elapsed() const {
-            return std::chrono::duration<double>(std::chrono::high_resolution_clock::now() - start).count();
-        }
-};
-
-class Student 
-{
-private:
-
-    string vardas_, pavarde_;
-    float galutinis_paz_, galutinis_;
-    int egz_paz_;
-    vector <int> nd_paz_;
-    vector <string> wordread_;
-    
-public:
-
-Student (const Student& df) 
-{
+Student::Student (const Student& df) {
     vardas_ = df.vardas_;
     pavarde_ = df.pavarde_;
     galutinis_paz_ = df.galutinis_paz_;
@@ -105,11 +28,9 @@ Student (const Student& df)
     }
 }
 
-~Student() {}
-
-Student& operator=(const Student& st) {
+Student& Student::operator=(const Student& st) {
     if (&st == this) {
-        return *this;
+    return *this;
     }
     vardas_ = st.vardas_;
     pavarde_ = st.pavarde_;
@@ -121,50 +42,7 @@ Student& operator=(const Student& st) {
         nd_paz_[i] = st.nd_paz_[i];
     }
     return *this;
-
 }
-
-void assign() 
-{
-    if(wordread_.size() == columncount)           
-    {   
-        for (int x =2; x<wordread_.size()-1; x++) 
-        {
-            nd_paz_.push_back(std::stoi(wordread_[x]));
-            galutinis_ += std::stoi(wordread_[x]);
-        }        
-        vardas_ = wordread_[0];
-        pavarde_ = wordread_[1];
-        egz_paz_ = std::stoi(wordread_[wordread_.size()-1]);
-        galutinis_paz_= (((galutinis_) / nd_paz_.size())*0.4 + egz_paz_*0.6);   
-    }
-    else {
-        throw 402;
-    }
-}
-
-Student () 
-
-{
-    vardas_ = pavarde_ = "";
-    nd_paz_.reserve(columncount-3);
-    wordread_.reserve(columncount);
-    galutinis_ =0;
-    galutinis_paz_ = 0;
-    egz_paz_ = 0;
-}
-
-    string vardas() const {        return vardas_;    }
-    string pavarde() const {        return pavarde_;    }
-    float galutinis_paz() const {        return galutinis_paz_;    }
-    float galutinis() const {        return galutinis_;    }
-    int egz_paz() const {        return egz_paz_;    }
-    vector <int> nd_paz() const{        return nd_paz_;    }
-    vector <string> wordread() const{        return wordread_;    }
-    
-    void setwordread(vector <string> v) {        wordread_ = v;    }
-   
-};
 
 int main() {
     
@@ -172,8 +50,7 @@ int main() {
 
     timer a;
     fileGenerator();
-    cout << std::to_string(size)+".txt generation: "  << a.elapsed() << "s"<< endl;
-    vectortotaltime += a.elapsed();
+    idk(a, "generation");
     
     readLine();
 
@@ -182,7 +59,6 @@ int main() {
     vector <Student> grupedu;
     vector <Student> grupedu_v;
     
-    vector <Student> qwerty;
     
     grupedu.resize(linecount);
         
@@ -208,38 +84,15 @@ int main() {
     }
     }
 
-    cout << std::to_string(size)+".txt handle: "  << c.elapsed() << "s"<< endl;
-    vectortotaltime += c.elapsed();
-
-
-    std::vector<Student>::iterator lp;
-    ofstream file33("vector "+std::to_string(size)+"<5.txt");
-    ofstream file44("vector "+std::to_string(size)+">=5.txt");
+    idk(c, "handling");
 
     timer b;
-
-    lp= grupedu.begin();            /// vector sort + write
-
-    int ii = 0;
-    for (lp = grupedu.begin(); lp != grupedu.end();)            
-    {
-        if (lp -> galutinis_paz() <5) 
-        {  
-            grupedu_v.push_back(*lp);
-            file33 << lineread[ii] << endl;
-        }
-        else 
-        {
-            file44 << lineread[ii] << endl;
-        }
-        lp ++;
-        ii ++;
-    }
+    sortWrite(grupedu, grupedu_v);
     
     grupedu.erase( remove_if(grupedu.begin(), grupedu.end(), [](const Student & c){return c.galutinis_paz() <5;}),     grupedu.end());
 
-    cout << std::to_string(size)+".txt sort + write: "  << b.elapsed() << "s"<< endl;
-    vectortotaltime += b.elapsed();
+    idk(b, "sort+writing");
+
     cout << std::to_string(size)+".txt total: "  << vectortotaltime << "s"<< endl;
 
 }
