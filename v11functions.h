@@ -14,7 +14,7 @@ vector <string> temp;
 int linecount = 0;
 int errorcount = 0;
 const int columncount = 8; /// file column count
-const int size = 1000000; /// file entry count
+const int size = 100000; /// file entry count
 float vectortotaltime=0;
 
 void fileGenerator() 

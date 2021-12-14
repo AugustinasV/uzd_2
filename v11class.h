@@ -1,7 +1,11 @@
 #include "v11functions.h"
 
+class person {
+    public:
+    virtual void assign()=0;
+};
 
-class Student
+class Student: public person
 {
 private:
 
