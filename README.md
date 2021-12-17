@@ -36,3 +36,15 @@ eilučių kiekis failo pavadinime ".txt"
 | 1000000.txt sort + write: 2.26775s | 1000000.txt sort + write: 1.74218s | 1000000.txt sort + write: 1.74841s | 1000000.txt sort + write: 1.74016s|
 | 1000000.txt total: 6.03193s | 1000000.txt total: 3.94976s | 1000000.txt total: 3.87391s | 1000000.txt total: 3.76008s|
 | 130,3 kB |49,1 kB | 53,2 kB | 57,2 kB |
+
+v1.2  
+========================  
+v1.1 versija papildytas destruktoriumi, copy konstruktoriumi, copy priskirimo operatoriumi.  
+
+v1.5  
+========================  
+Klasė Student dabar yra paveldėta iš abstrakčios klasės Person.  
+
+v2.0
+========================  
+Sukurti versijos v1.5 Unit Testai 
