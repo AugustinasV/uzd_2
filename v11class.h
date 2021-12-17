@@ -33,7 +33,7 @@ void assign()
         vardas_ = wordread_[0];
         pavarde_ = wordread_[1];
         egz_paz_ = std::stoi(wordread_[wordread_.size()-1]);
-        // galutinis_paz_= (((galutinis_) / nd_paz_.size())*0.4 + egz_paz_*0.6);   
+        galutinis_paz_= (((galutinis_) / nd_paz_.size())*0.4 + egz_paz_*0.6);   
     }
     else {
         throw 402;
